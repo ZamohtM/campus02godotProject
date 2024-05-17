@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://81nq0v4tee3i"]
+
+[ext_resource type="Script" path="res://scripts/LoginContext.cs" id="1_jwfww"]
+[ext_resource type="Texture2D" uid="uid://ph8en0g0qid6" path="res://resources/FH_Campus02_Logo.png" id="2_8th6g"]
+
+[node name="LoginContext" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jwfww")
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Campus02Logo" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 113.0
+offset_top = 203.0
+offset_right = 3656.0
+offset_bottom = 1352.0
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_8th6g")
+
+[node name="LoginButton" type="Button" parent="."]
+layout_mode = 1
+offset_left = 38.0
+offset_top = 813.0
+offset_right = 538.0
+offset_bottom = 863.0
+text = "Login"
+
+[node name="RegisterButton" type="Button" parent="."]
+layout_mode = 1
+offset_left = 38.0
+offset_top = 877.0
+offset_right = 538.0
+offset_bottom = 927.0
+text = "Register"
+
+[node name="EmailTextField" type="LineEdit" parent="."]
+layout_mode = 1
+offset_left = 38.0
+offset_top = 678.0
+offset_right = 538.0
+offset_bottom = 728.0
+placeholder_text = "Username"
+
+[node name="PasswordTextField" type="LineEdit" parent="."]
+layout_mode = 1
+offset_left = 38.0
+offset_top = 744.0
+offset_right = 538.0
+offset_bottom = 794.0
+placeholder_text = "Password"
+virtual_keyboard_type = 6
+secret = true
+
+[node name="HTTPRegister" type="HTTPRequest" parent="."]
+
+[node name="HTTPLogin" type="HTTPRequest" parent="."]
+
+[connection signal="pressed" from="LoginButton" to="." method="_on_login_button_pressed"]
+[connection signal="pressed" from="RegisterButton" to="." method="_on_register_button_pressed"]
