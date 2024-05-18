@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfm4q4gujpr5g"]
+[gd_scene load_steps=5 format=3 uid="uid://bfm4q4gujpr5g"]
 
 [ext_resource type="Script" path="res://scripts/MainContext.cs" id="1_s1ruf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yhk2l"]
+font_size = 58
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_l02y2"]
+font_size = 66
+
+[sub_resource type="LabelSettings" id="LabelSettings_r7oh5"]
+font_size = 19
+font_color = Color(0, 0, 0, 1)
 
 [node name="MainContext" type="Control"]
 layout_mode = 3
@@ -9,14 +20,98 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_s1ruf")
+metadata/_edit_vertical_guides_ = [289.0, 562.0, 16.0]
+metadata/_edit_horizontal_guides_ = [107.0]
 
-[node name="EmailLabel" type="RichTextLabel" parent="."]
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 16.0
+offset_right = 409.0
+offset_bottom = 95.0
+text = "Einkaufslisten"
+label_settings = SubResource("LabelSettings_yhk2l")
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+z_index = -1
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
-fit_content = true
+
+[node name="AddButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.01
+anchor_bottom = 0.003
+offset_left = 418.0
+offset_top = 91.0
+offset_right = 487.24
+offset_bottom = 229.928
+rotation = -1.57079
+
+[node name="ButtonLabel" type="Label" parent="AddButton"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 75.0
+offset_bottom = 141.0
+text = "+"
+label_settings = SubResource("LabelSettings_l02y2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainerOwner" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 155.0
+offset_right = 562.0
+offset_bottom = 524.0
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="VBoxContainerOwner" type="VBoxContainer" parent="ScrollContainerOwner"]
+layout_mode = 2
+
+[node name="ScrollContainerShared" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 569.0
+offset_right = 562.0
+offset_bottom = 1005.0
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="VBoxContainerShared" type="VBoxContainer" parent="ScrollContainerShared"]
+layout_mode = 2
+
+[node name="HTTPOwner" type="HTTPRequest" parent="."]
+
+[node name="HTTPShared" type="HTTPRequest" parent="."]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 117.0
+offset_right = 146.0
+offset_bottom = 144.0
+text = "Eigene Listen:"
+label_settings = SubResource("LabelSettings_r7oh5")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 536.0
+offset_right = 162.0
+offset_bottom = 563.0
+text = "Geteilte Listen:"
+label_settings = SubResource("LabelSettings_r7oh5")
+
+[connection signal="pressed" from="AddButton" to="." method="_on_add_button_pressed"]

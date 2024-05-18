@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://81nq0v4tee3i"]
+[gd_scene load_steps=4 format=3 uid="uid://81nq0v4tee3i"]
 
-[ext_resource type="Script" path="res://scripts/LoginContext.cs" id="1_j5wlu"]
+[ext_resource type="Script" path="res://scripts/AuthContext.cs" id="1_j5wlu"]
 [ext_resource type="Texture2D" uid="uid://ph8en0g0qid6" path="res://resources/FH_Campus02_Logo.png" id="2_0f10j"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5g10t"]
+font_size = 21
+font_color = Color(0, 0, 0, 1)
 
 [node name="AuthContext" type="Control"]
 layout_mode = 3
@@ -11,6 +15,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_j5wlu")
+metadata/_edit_vertical_guides_ = [290.0]
 
 [node name="BackgroundColor" type="ColorRect" parent="."]
 layout_mode = 1
@@ -23,42 +28,52 @@ grow_vertical = 2
 [node name="Campus02Logo" type="TextureRect" parent="."]
 layout_mode = 1
 offset_left = 113.0
-offset_top = 203.0
+offset_top = 85.0
 offset_right = 3656.0
-offset_bottom = 1352.0
+offset_bottom = 1234.0
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_0f10j")
 
 [node name="LoginButton" type="Button" parent="."]
 layout_mode = 1
-offset_left = 38.0
-offset_top = 813.0
-offset_right = 538.0
-offset_bottom = 863.0
+offset_left = 40.0
+offset_top = 426.0
+offset_right = 540.0
+offset_bottom = 476.0
 text = "Login"
 
 [node name="RegisterButton" type="Button" parent="."]
 layout_mode = 1
-offset_left = 38.0
-offset_top = 877.0
-offset_right = 538.0
-offset_bottom = 927.0
+offset_left = 40.0
+offset_top = 490.0
+offset_right = 540.0
+offset_bottom = 540.0
 text = "Register"
+
+[node name="OfflineButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 554.0
+offset_right = 540.0
+offset_bottom = 604.0
+text = "Offline"
 
 [node name="EmailTextField" type="LineEdit" parent="."]
 layout_mode = 1
-offset_left = 38.0
-offset_top = 678.0
-offset_right = 538.0
-offset_bottom = 728.0
-placeholder_text = "Username"
+offset_left = 40.0
+offset_top = 291.0
+offset_right = 540.0
+offset_bottom = 341.0
+text = "thomas@test.at"
+placeholder_text = "Email"
 
 [node name="PasswordTextField" type="LineEdit" parent="."]
 layout_mode = 1
-offset_left = 38.0
-offset_top = 744.0
-offset_right = 538.0
-offset_bottom = 794.0
+offset_left = 40.0
+offset_top = 357.0
+offset_right = 540.0
+offset_bottom = 407.0
+text = "test123"
 placeholder_text = "Password"
 virtual_keyboard_type = 6
 secret = true
@@ -67,5 +82,33 @@ secret = true
 
 [node name="HTTPLogin" type="HTTPRequest" parent="."]
 
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 791.0
+offset_right = 362.0
+offset_bottom = 821.0
+text = "Thomas Mayer"
+label_settings = SubResource("LabelSettings_5g10t")
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 217.0
+offset_top = 750.0
+offset_right = 356.0
+offset_bottom = 780.0
+text = "Martin Lunelli"
+label_settings = SubResource("LabelSettings_5g10t")
+
+[node name="Label4" type="Label" parent="."]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 707.0
+offset_right = 399.0
+offset_bottom = 737.0
+text = "Markus Knittelfelder"
+label_settings = SubResource("LabelSettings_5g10t")
+
 [connection signal="pressed" from="LoginButton" to="." method="_on_login_button_pressed"]
 [connection signal="pressed" from="RegisterButton" to="." method="_on_register_button_pressed"]
+[connection signal="pressed" from="OfflineButton" to="." method="_on_offline_button_pressed"]

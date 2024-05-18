@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://d00trcrsqx4h4"]
+
+[ext_resource type="Script" path="res://scripts/ShoppingListItemContext.cs" id="1_yyj8b"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_slu8d"]
+font_size = 46
+
+[node name="ShoppingListItemContext" type="Control"]
+custom_minimum_size = Vector2(548, 108)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 95.0
+offset_right = -13.0
+offset_bottom = -821.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yyj8b")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EditButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 479.0
+offset_top = 32.0
+offset_right = 529.0
+offset_bottom = 82.0
+text = "Edit"
+
+[node name="NameLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 24.0
+offset_right = 446.0
+offset_bottom = 88.0
+text = "Placeholder Name"
+label_settings = SubResource("LabelSettings_slu8d")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Panel/EditButton" to="." method="_on_edit_button_pressed"]
