@@ -84,27 +84,27 @@ secret = true
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 214.0
+offset_left = 216.0
 offset_top = 791.0
-offset_right = 362.0
+offset_right = 364.0
 offset_bottom = 821.0
 text = "Thomas Mayer"
 label_settings = SubResource("LabelSettings_5g10t")
 
 [node name="Label3" type="Label" parent="."]
 layout_mode = 0
-offset_left = 217.0
+offset_left = 221.0
 offset_top = 750.0
-offset_right = 356.0
+offset_right = 360.0
 offset_bottom = 780.0
 text = "Martin Lunelli"
 label_settings = SubResource("LabelSettings_5g10t")
 
 [node name="Label4" type="Label" parent="."]
 layout_mode = 0
-offset_left = 193.0
+offset_left = 188.0
 offset_top = 707.0
-offset_right = 399.0
+offset_right = 394.0
 offset_bottom = 737.0
 text = "Markus Knittelfelder"
 label_settings = SubResource("LabelSettings_5g10t")

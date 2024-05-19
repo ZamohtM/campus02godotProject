@@ -27,23 +27,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="EditButton" type="Button" parent="Panel"]
-layout_mode = 0
-offset_left = 479.0
-offset_top = 32.0
-offset_right = 529.0
-offset_bottom = 82.0
-text = "Edit"
-
 [node name="NameLabel" type="Label" parent="Panel"]
+z_index = 1
 layout_mode = 0
-offset_left = 36.0
+offset_left = 65.0
 offset_top = 24.0
-offset_right = 446.0
+offset_right = 475.0
 offset_bottom = 88.0
 text = "Placeholder Name"
 label_settings = SubResource("LabelSettings_slu8d")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="EditButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="pressed" from="Panel/EditButton" to="." method="_on_edit_button_pressed"]

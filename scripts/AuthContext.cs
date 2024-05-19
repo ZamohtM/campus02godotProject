@@ -26,10 +26,7 @@ public partial class AuthContext : Control
 		{
 			GD.Print("Error occured!");	
 		}else {
-			GlobalData.Instance.Email = response["email"].ToString();
-			GlobalData.Instance.LocalId = response["localId"].ToString();
-			GlobalData.Instance.IdToken = response["idToken"].ToString();
-			GlobalData.Instance.refreshToken = response["refreshToken"].ToString();
+			GlobalData.Instance.logIn(response["email"].ToString(),response["idToken"].ToString(),response["localId"].ToString(),response["refreshToken"].ToString());
 			GetTree().ChangeSceneToFile("res://scenes/MainContext.tscn");
 		}
 	}

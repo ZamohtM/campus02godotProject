@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://nol1dwdv3kiw"]
+[gd_scene load_steps=3 format=3 uid="uid://bx348e4urcosv"]
 
-[ext_resource type="Script" path="res://scripts/NewShoppingListContext.cs" id="1_c2wnb"]
+[ext_resource type="Script" path="res://scripts/NewProductContext.cs" id="1_qd48k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_22uty"]
 font_size = 36
 
-[node name="NewShoppingListContext" type="Control"]
+[node name="NewProductContext" type="Control"]
 z_index = 1
 layout_mode = 3
 anchors_preset = 15
@@ -17,7 +17,7 @@ offset_right = -43.0
 offset_bottom = -418.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_c2wnb")
+script = ExtResource("1_qd48k")
 
 [node name="BackgroundColor" type="ColorRect" parent="."]
 layout_mode = 1
@@ -32,7 +32,7 @@ color = Color(0.758192, 0.758192, 0.758192, 1)
 layout_mode = 0
 offset_right = 484.0
 offset_bottom = 23.0
-text = "Neue Einkaufsliste"
+text = "Neues Produkt"
 label_settings = SubResource("LabelSettings_22uty")
 horizontal_alignment = 1
 
@@ -44,13 +44,13 @@ offset_right = 471.0
 offset_bottom = 117.0
 placeholder_text = "Name"
 
-[node name="SharedWithTextField" type="LineEdit" parent="."]
+[node name="QuantityTextField" type="LineEdit" parent="."]
 layout_mode = 0
 offset_left = 13.0
 offset_top = 131.0
 offset_right = 471.0
 offset_bottom = 182.0
-placeholder_text = "Teilen mit ( ; zwischen usern)"
+placeholder_text = "Anzahl"
 
 [node name="CreateButton" type="Button" parent="."]
 layout_mode = 0
@@ -60,8 +60,6 @@ offset_right = 472.0
 offset_bottom = 244.0
 text = "Erstellen
 "
-
-[node name="HTTPNewShoppingList" type="HTTPRequest" parent="."]
 
 [node name="CloseButton" type="Button" parent="."]
 layout_mode = 0

@@ -7,8 +7,9 @@ public partial class ShoppingListItemContext : Control
 	{
 	}
 
-	private void _on_edit_button_pressed()
+	public void _on_edit_button_pressed()
 	{
-		GD.Print(this.GetMeta("document_id"));
+		GlobalData.Instance.setOpenedList(this.GetMeta("document_id").ToString(),this.GetMeta("name").ToString());
+		GetTree().ChangeSceneToFile("res://scenes/ShoppingListContext.tscn");
 	}
 }

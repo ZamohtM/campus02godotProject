@@ -11,7 +11,7 @@ public partial class FirebaseConnector : Node
 	private static readonly string LOGIN_URL = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=";
     private static readonly string REST_URL = "https://firestore.googleapis.com/v1/projects/gmc-c02/databases/(default)/documents";
     private static readonly string QUERY_URL = "https://firestore.googleapis.com/v1/projects/gmc-c02/databases/(default)/documents:runQuery";
-
+    private static readonly string SHOPPINGLIST_URL = "https://firestore.googleapis.com/v1/projects/gmc-c02/databases/(default)/documents/shoppingLists/";
 
 	public async Task<JObject> _send_auth_request(bool function, string email, string password, HttpRequest httpRequest)
     {
@@ -53,18 +53,23 @@ public partial class FirebaseConnector : Node
 		}
 
 		var body = new JObject(
-    		new JProperty("fields",
-        		new JObject(
-            		new JProperty("name", new JObject(new JProperty("stringValue", name))),
-            		new JProperty("owner", new JObject(new JProperty("stringValue", GlobalData.Instance.Email))),
-            		new JProperty("sharedWith", new JObject(
-                		new JProperty("arrayValue", 
-                   			new JObject(new JProperty("values", sharedWithUsers))
-                		)
-            		))
-        		)
-    		)
-		);
+            new JProperty("fields",
+                new JObject(
+                    new JProperty("name", new JObject(new JProperty("stringValue", name))),
+                    new JProperty("owner", new JObject(new JProperty("stringValue", GlobalData.Instance.Email))),
+                    new JProperty("sharedWith", new JObject(
+                        new JProperty("arrayValue", 
+                            new JObject(new JProperty("values", sharedWithUsers))
+                        )
+                    )),
+                    new JProperty("items", new JObject(
+                        new JProperty("arrayValue", 
+                            new JObject(new JProperty("values", new JArray()))
+                        )
+                    ))
+                )
+            )
+        );
 
         var error = httpRequest.Request(url, new string[] {"Content-Type: application/json","Auth: Bearer "+GlobalData.Instance.IdToken}, HttpClient.Method.Post, body.ToString());
         if (error != Error.Ok)
@@ -163,4 +168,67 @@ public partial class FirebaseConnector : Node
 
 		return JArray.Parse(System.Text.Encoding.UTF8.GetString(responseBody));
     }
+
+    public async Task<string> _get_shoppinglist_request(string shoppingListId, HttpRequest httpRequest)
+    {
+        string url = SHOPPINGLIST_URL+shoppingListId;
+
+        var error = httpRequest.Request(url, new string[] {"Content-Type: application/json","Auth: Bearer "+GlobalData.Instance.IdToken}, HttpClient.Method.Get);
+        if (error != Error.Ok)
+        {
+			return "error";
+        }
+
+        var signal = await ToSignal(httpRequest, "request_completed");
+
+        long result = (long)signal[0];
+        long responseCode = (long)signal[1];
+        string[] responseHeaders = (string[])signal[2];
+        byte[] responseBody = (byte[])signal[3];
+
+        GlobalData.Instance.opendShoppingList = JObject.Parse(System.Text.Encoding.UTF8.GetString(responseBody));
+
+		return responseCode.ToString();
+    }
+
+    public async Task<string> _delete_shoppinglist_request(string shoppingListId, HttpRequest httpRequest)
+    {
+        string url = SHOPPINGLIST_URL+shoppingListId;
+
+        var error = httpRequest.Request(url, new string[] {"Content-Type: application/json","Auth: Bearer "+GlobalData.Instance.IdToken}, HttpClient.Method.Delete);
+        if (error != Error.Ok)
+        {
+			return "error";
+        }
+
+        var signal = await ToSignal(httpRequest, "request_completed");
+
+        long result = (long)signal[0];
+        long responseCode = (long)signal[1];
+        string[] responseHeaders = (string[])signal[2];
+        byte[] responseBody = (byte[])signal[3];
+
+		return responseCode.ToString();
+    }
+
+    public async Task<string> _patch_shoppinglist_request(string shoppingListId, JObject body, HttpRequest httpRequest)
+    {
+        string url = SHOPPINGLIST_URL+shoppingListId;
+
+        var error = httpRequest.Request(url, new string[] {"Content-Type: application/json","Auth: Bearer "+GlobalData.Instance.IdToken}, HttpClient.Method.Patch,body.ToString());
+        if (error != Error.Ok)
+        {
+			return "error";
+        }
+
+        var signal = await ToSignal(httpRequest, "request_completed");
+
+        long result = (long)signal[0];
+        long responseCode = (long)signal[1];
+        string[] responseHeaders = (string[])signal[2];
+        byte[] responseBody = (byte[])signal[3];
+
+		return responseCode.ToString();
+    }
+
 }

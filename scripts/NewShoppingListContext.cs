@@ -30,7 +30,7 @@ public partial class NewShoppingListContext : Control
 
 	private void _on_close_button_pressed()
 	{
-		GetNode<Button>("/root/MainContext/AddButton").Disabled = false;
+		GetNode<MainContext>("/root/MainContext").EnableAllButtons(GetTree().Root);
 		QueueFree();
 	}
 }
