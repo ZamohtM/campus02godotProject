@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://81nq0v4tee3i"]
 
-[ext_resource type="Script" path="res://scripts/AuthContext.cs" id="1_j5wlu"]
+[ext_resource type="Script" path="res://scripts/AuthContext.cs" id="1_drngn"]
 [ext_resource type="Texture2D" uid="uid://ph8en0g0qid6" path="res://resources/FH_Campus02_Logo.png" id="2_0f10j"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5g10t"]
@@ -14,7 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_j5wlu")
+script = ExtResource("1_drngn")
 metadata/_edit_vertical_guides_ = [290.0]
 
 [node name="BackgroundColor" type="ColorRect" parent="."]

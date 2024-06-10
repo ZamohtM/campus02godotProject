@@ -4,11 +4,17 @@ using System;
 
 public partial class NewShoppingListContext : Control
 {
-	FirebaseConnector fbConnector = new FirebaseConnector();
+	private ConnectorContext connector
+    {
+        get => GlobalData.Instance.connector;
+        set => GlobalData.Instance.connector = value;
+    }
+	
+	
 	private PackedScene itemScene;
 	public override void _Ready()
 	{
-		AddChild(fbConnector);	
+		//AddChild(connector as Node);	
 		itemScene = (PackedScene)ResourceLoader.Load("res://scenes/ShoppingListItemContext.tscn");
 	}
 
@@ -17,8 +23,10 @@ public partial class NewShoppingListContext : Control
 		string name = GetNode<LineEdit>("NameTextField").Text;
 		string[] sharedWith = GetNode<LineEdit>("SharedWithTextField").Text.Split(';');
 
-		string response = await fbConnector._send_new_shoppinglist_request(sharedWith,name,GetNode<HttpRequest>("HTTPNewShoppingList"));
-		if (response.Equals("200"))
+		string response = await connector._send_new_shoppinglist_request(sharedWith,name,GetNode<HttpRequest>("HTTPNewShoppingList"));
+		GD.Print(response);
+		//200 reicht nicht weil es eine http response ist
+		if (response.Equals("200") || response.Equals("OK"))
 		{
 			GD.Print("Success");
 			QueueFree();

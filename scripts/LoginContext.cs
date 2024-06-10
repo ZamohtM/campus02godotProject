@@ -1,17 +1,42 @@
+/*
+
+
+
+
+DEPRECATED
+
+
+
+
+*/
+
+using System.Threading.Tasks;
 using Godot;
 using Newtonsoft.Json.Linq;
 
+
 public partial class LoginContext : Control
 {
-	FirebaseConnector fbConnector = new FirebaseConnector();
+	 
+	ConnectorContext connector;
 
 	public override void _Ready()
 	{
-		AddChild(fbConnector);		
+		AddChild(connector as Node);		
 	}
 
 	public async void _on_login_button_pressed()
 	{
+		
+		if(Utilities.IsInternetAvailable())
+		{
+			connector = new FirebaseConnector();
+		}
+		else
+		{
+			connector = new SQLiteConnector();
+		}
+		
 		string email = GetNode<LineEdit>("EmailTextField").Text;
 		string password = GetNode<LineEdit>("PasswordTextField").Text;
 
@@ -21,7 +46,7 @@ public partial class LoginContext : Control
 			return;
 		}
 
-		JObject response = await fbConnector._send_auth_request(true,email,password,GetNode<HttpRequest>("HTTPRegister"));
+		JObject response = await connector._send_auth_request(true,email,password,GetNode<HttpRequest>("HTTPRegister"));
 		if(response.ContainsKey("error"))
 		{
 			GD.Print("Error occured!");	
@@ -42,7 +67,7 @@ public partial class LoginContext : Control
 			return;
 		}
 
-		JObject response = await fbConnector._send_auth_request(false,email,password,GetNode<HttpRequest>("HTTPRegister"));
+		JObject response = await connector._send_auth_request(false,email,password,GetNode<HttpRequest>("HTTPRegister"));
 		if(response.ContainsKey("error"))
 		{
 			GD.Print("Error occured!");	

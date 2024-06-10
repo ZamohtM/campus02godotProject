@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 
 
-public partial class FirebaseConnector : Node
+public partial class FirebaseConnector : Node, ConnectorContext
 {
 	private static readonly string API_KEY = "AIzaSyBVjrtLGD1NkLkzGgor1AU4YpdE5GMS82M";
 	private static readonly string PROJECT_ID = "gmc-c02";
