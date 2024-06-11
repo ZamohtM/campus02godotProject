@@ -213,14 +213,52 @@ public partial class SQLiteConnector : Node, ConnectorContext
 
 public async Task<string> _patch_shoppinglist_request(string shoppingListId, JObject body, HttpRequest httpRequest)
 {
-    GD.Print("_patch_shoppinglist_request");
+    // Step 1: Fetch the existing shopping list
+    //GD.Print("Step 1");
+    //string existingListResult = await _get_shoppinglist_request(shoppingListId, httpRequest);
+    //JObject existingList = JObject.Parse(existingListResult);
 
-    // Convert JObject to Godot.Collections.Dictionary
-    var godotDict = ConvertJObjectToDictionary(body);
-    var result = database.Call("_patch_shoppinglist_request", shoppingListId, godotDict);
-    
-    return await Task.FromResult(result.ToString());
+    GD.Print("Step 2");
+    // Step 2: Get new items from body
+    JObject futureList = body;
+
+    GD.Print("Step 3");
+    // Step 3: Delete every item from the existing list with id
+    database.Call("_delete_items", shoppingListId);
+
+    GD.Print("Step 4");
+    // Step 4: Add new items in body to the existing list
+    foreach (JObject item in futureList["fields"]["items"]["arrayValue"]["values"])
+    {
+        //foreach (JObject item in items)
+        //{
+            GD.Print(item);
+            /* item:
+            {
+            "mapValue": {
+              "fields": {
+                "quantity": {
+                  "stringValue": "1STK"
+                },
+                "name": {
+                  "stringValue": "Apfel"
+                }
+              }
+            }
+          }
+            */
+            string name = item["mapValue"]["fields"]["name"]["stringValue"].ToString();
+            string quantity = item["mapValue"]["fields"]["quantity"]["stringValue"].ToString();
+            // Add item to database (this is a placeholder, you need to implement this method in your GDScript
+            database.Call("_add_item", shoppingListId, name, quantity);
+        }
+    //}
+
+    return "Shopping list updated successfully";
 }
+
+
+
 
 private Godot.Collections.Dictionary ConvertJObjectToDictionary(JObject jobject)
 {

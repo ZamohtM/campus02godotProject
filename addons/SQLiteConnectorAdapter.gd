@@ -190,25 +190,30 @@ func _delete_shoppinglist_request(shopping_list_id):
 	database.query("COMMIT;")
 	return "Shopping list and associated items deleted successfully" 
 
-func _patch_shoppinglist_request(shopping_list_id, body):
+func _add_item(shopping_list_id, name, quantity):
+	print("add item")
 	if not _open_database("res://data.db"):
-		return "Failed to open database"
-
-	var updates = []
-	var bindings = []
-	for key in body.keys():
-		updates.append("%s = ?" % key)
-		bindings.append(body[key])
-
-	var query = "UPDATE shoppingList SET " + ", ".join(updates) + " WHERE id = ?;"
-	bindings.append(shopping_list_id)
-
-	var result = database.query_with_bindings(query, bindings)
+		return false
+	
+	var query = "INSERT INTO items (shoppingList, name, quantity) VALUES (?, ?, ?);"
+	var result = database.query_with_bindings(query, [shopping_list_id, name, quantity])
+	print("Added item: "+shopping_list_id + " "+ name)
+	if result != true:
+		return false
+	
+	return true
+	
+func _delete_items(shopping_list_id):
+	if not _open_database("res://data.db"):
+		return false
+	
+	var query = "DELETE FROM items WHERE shoppingList = ?;"
+	var result = database.query_with_bindings(query, [shopping_list_id])
 	
 	if result != true:
-		return result
+		return false
 	
-	return "Shopping list updated successfully"
+	return true
 
 func _send_auth_request(function, email, password):
 	# This function would typically interact with an external authentication service.

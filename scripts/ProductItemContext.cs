@@ -11,5 +11,6 @@ public partial class ProductItemContext : Control
 	private void _on_button_pressed()
 	{
 		QueueFree();
+		GD.Print(GlobalData.Instance.opendShoppingList.ToString());
 	}
 }
