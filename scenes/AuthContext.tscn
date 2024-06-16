@@ -109,6 +109,16 @@ offset_bottom = 737.0
 text = "Markus Knittelfelder"
 label_settings = SubResource("LabelSettings_5g10t")
 
+[node name="Label5" type="Label" parent="."]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 833.0
+offset_right = 396.0
+offset_bottom = 863.0
+text = "Florian Schlatter"
+label_settings = SubResource("LabelSettings_5g10t")
+horizontal_alignment = 1
+
 [connection signal="pressed" from="LoginButton" to="." method="_on_login_button_pressed"]
 [connection signal="pressed" from="RegisterButton" to="." method="_on_register_button_pressed"]
 [connection signal="pressed" from="OfflineButton" to="." method="_on_offline_button_pressed"]

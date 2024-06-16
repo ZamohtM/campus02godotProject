@@ -8,7 +8,9 @@ const SQLITE_DONE = 101
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_open_database("res://data.db")
+	#_open_database("res://data/data.db")
+	_open_database("user://data.db")
+	
 	_createDatabaseTables()
 	
 	
@@ -56,7 +58,7 @@ func _createDatabaseTables():
 	print("Tables created successfully")
 
 func _send_new_shoppinglist_request(shared_with, name, owner):
-	if not _open_database("res://data.db"):
+	if not _open_database("user://data.db"):
 		return "Failed to open database"
 
 	database.query("BEGIN;") # Start a transaction
@@ -85,7 +87,7 @@ func _send_new_shoppinglist_request(shared_with, name, owner):
 	return "OK"
 
 func _get_shoppinglists_owner_request(email):
-	if not _open_database("res://data.db"):
+	if not _open_database("user://data.db"):
 		return []
 
 	var query = "SELECT * FROM shoppingList WHERE owner = ?;"
@@ -98,7 +100,7 @@ func _get_shoppinglists_owner_request(email):
 	return lists
 
 func _get_shoppinglists_shared_request(email):
-	if not _open_database("res://data.db"):
+	if not _open_database("user://data.db"):
 		return "Failed to open database"
 
 	var query = """
@@ -116,7 +118,7 @@ func _get_shoppinglists_shared_request(email):
 	return lists
 
 #func _get_shoppinglist_request(shopping_list_id):
-#	if not _open_database("res://data.db"):
+#	if not _open_database("user://data.db"):
 #		return "Failed to open database"
 #
 #	var query = "SELECT * FROM shoppingList WHERE id = ?;"
@@ -132,7 +134,7 @@ func _get_shoppinglists_shared_request(email):
 #	return list
 
 func _get_shoppinglist_request(shopping_list_id: int):
-	if not _open_database("res://data.db"):
+	if not _open_database("user://data.db"):
 		return "Failed to open database"
 
 	var query = "SELECT * FROM shoppingList WHERE id = ?;"
@@ -156,7 +158,7 @@ func _get_shoppinglist_request(shopping_list_id: int):
 	return list
 
 func _delete_shoppinglist_request(shopping_list_id):
-	if not _open_database("res://data.db"):
+	if not _open_database("user://data.db"):
 		return "Failed to open database"
 
 	# Start a transaction
@@ -192,7 +194,7 @@ func _delete_shoppinglist_request(shopping_list_id):
 
 func _add_item(shopping_list_id, name, quantity):
 	print("add item")
-	if not _open_database("res://data.db"):
+	if not _open_database("user://data.db"):
 		return false
 	
 	var query = "INSERT INTO items (shoppingList, name, quantity) VALUES (?, ?, ?);"
@@ -204,7 +206,7 @@ func _add_item(shopping_list_id, name, quantity):
 	return true
 	
 func _delete_items(shopping_list_id):
-	if not _open_database("res://data.db"):
+	if not _open_database("user://data.db"):
 		return false
 	
 	var query = "DELETE FROM items WHERE shoppingList = ?;"
